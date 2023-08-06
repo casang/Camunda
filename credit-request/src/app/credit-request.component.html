@@ -1,0 +1,65 @@
+<!---p>credit-request works!</p-->
+<div [hidden]="submitted">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Proposta de Credito</li>
+    </ol>
+  </nav>
+  <div class="container">
+    <div class="card add-proposal">
+        <h5 class="card-header">Adicionar proposta de crédito</h5>
+        <div class="card-body">
+            <form id="add-form" (ngSubmit)="f.form.valid && saveCreditRequest(f)" #f="ngForm" novalidate>
+              <div class="form-group">
+                <label for="valor">Valor</label>
+                <input type="text" [(ngModel)]="creditRequest.value" id="valor" name="valor" #valor="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && valor.invalid }" placeholder="Digite o Valor">
+                <div *ngIf="f.submitted && valor.invalid" class="invalid-feedback">
+                    <div *ngIf="valor!.errors!.required">Valor é obrigatório</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="valor">Prazo</label>
+                <input type="text" [(ngModel)]="creditRequest.period" id="prazo" name="prazo" #prazo="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && prazo.invalid }" placeholder="Digite o Prazo">
+                <div *ngIf="f.submitted && valor.invalid" class="invalid-feedback">
+                    <div *ngIf="prazo!.errors!.required">Prazo é obrigatório</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="valor">Pré-aprovado</label>
+                <input type="text" [(ngModel)]="creditRequest.approvedCod" id="aprovedCod" name="aprovedCod" #aprovedCod="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && valor.invalid }" placeholder="Digite o Código de Pré-aprovação">
+              </div>
+              <div class="form-group">
+                <label for="valor">Email</label>
+                <input type="text" [(ngModel)]="creditRequest.email" id="email" name="email" #email="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && valor.invalid }" placeholder="Digite seu e-mail">
+              </div>
+              <button type="submit" class="btn btn-primary btn-add-credit-request">Salvar</button>
+              <button type="reset" class="btn btn-secondary btn-add-credit-request" (click)="cleanForm(f)">Cancelar</button>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>
+<div [hidden]="!submitted">
+  <div class="container">
+    <div class="card add-proposal">
+        <h5 class="card-header">Resposta do Pedido de Crédito</h5>
+        <div class="card-body">
+            <form id="add-form" (ngSubmit)="f.form.valid && saveCreditRequest(f)" #f="ngForm" novalidate>
+              <div class="form-group">
+                <label for="valor">Protocolo:</label>
+                <!---label for="valor">Protocolo:[innerHtml]="payId"</label>
+                <div class="card-body">
+                  <label>Proto:</label>
+                  [innerHtml]="payId">
+                </div-->
+                <input type="text" [(ngModel)]="payId" id="valor" size=80 name="valor" #valor="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && valor.invalid }" >
+                <label for="res"><br>Resultado:</label>
+                <input type="text" [(ngModel)]="msgUser" id="res" size=100 name="res" #res="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && res.invalid }">
+              </div>
+              <button type="reset" class="btn btn-secondary btn-add-credit-request" (click)="cleanForm(f)">Voltar</button>
+            </form>
+        </div>
+      </div>
+  </div>
+</div>
+
